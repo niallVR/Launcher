@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <!-- Project -->
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>NiallVR.Launcher</RootNamespace>
+
+        <!-- Build -->
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+        <!-- Nuget -->
+        <PackageId>NiallVR.Launcher</PackageId>
+        <Title>Launcher</Title>
+        <Authors>NiallVR</Authors>
+        <Description>🚀 A collection of classes and extensions to bootstrap my C# applications</Description>
+        <PackageProjectUrl>https://github.com/niallVR/Launcher</PackageProjectUrl>
+        <License>https://github.com/niallVR/Launcher/blob/main/LICENSE</License>
+        <RepositoryUrl>https://github.com/niallVR/Launcher</RepositoryUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+      <PackageReference Include="Serilog.Extensions.Hosting" Version="4.2.0" />
+      <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,39 @@
+name: Build, Test and Publish
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+          include-prerelease: true
+
+      - name: Checkout files
+        uses: actions/checkout@v2
+
+      - name: Run Unit Tests
+        run: dotnet test --verbosity normal
+  
+  publish-Launcher:
+    needs: run-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+          include-prerelease: true
+
+      - name: Checkout files
+        uses: actions/checkout@v2
+
+      - name: Create the package
+        run: dotnet pack Source/Launcher -c Release -p:Version=${{ github.event.release.tag_name }}
+
+      - name: Push NuGet
+        run: dotnet nuget push Source/Launcher/bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
